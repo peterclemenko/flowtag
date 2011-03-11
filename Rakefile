@@ -13,16 +13,20 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "flowtag"
-  gem.homepage = "http://github.com/chrislee35/flowtag"
+  gem.homepage = "https://rubygems.org/gems/flowtag"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "chrislee-AT-gatechedu"
-  gem.authors = ["Chris Lee, PhD"]
+  gem.summary = %Q{FlowTag visualizes pcap files for forensic analysis}
+  gem.description = %Q{presents the user with a GUI interface to visualize and explore flows found from a given pcap file}
+  gem.email = "rubygems@chrislee.dhs.org"
+  gem.authors = ["Chris Lee"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
+  gem.signing_key = "#{ENV['HOME']}/bin/ruby/rubygems/gem-private_key.pem"
+  gem.cert_chain  = ["#{ENV['HOME']}/bin/ruby/rubygems/gem-public_cert.pem"]
+  gem.files = FileList["{bin,lib}/**/*"].to_a
+  gem.add_runtime_dependency "tk-double-slider", ">= 0.1.0"
+  gem.add_runtime_dependency "tk-parallel-coordinates", ">= 0.1.0"
+  gem.executables = ["flowtag","ftlistflows","ftpcap2flowdb","ftprintflow"]
 end
 Jeweler::RubygemsDotOrgTasks.new
 
