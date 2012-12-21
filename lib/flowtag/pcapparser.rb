@@ -66,8 +66,8 @@ module FlowTag
 			@ip = (data[12,2].unpack("n")[0] == 0x0800) ? true : false
 			offset = 14
 			if @ip
-				@ip_hlen = (data[offset].ord & 0x0f) << 2
-				@ip_proto = data[offset+9].ord
+				@ip_hlen = (data[offset,1].unpack("C")[0] & 0x0f) << 2
+				@ip_proto = data[offset+9,1].unpack("C")[0]
 				@ip_src, @ip_dst = data[offset+12,8].unpack("NN")
 				offset += @ip_hlen
 				@tcp = true if @ip_proto == 0x06
@@ -76,7 +76,7 @@ module FlowTag
 					@sport, @dport = data[offset,4].unpack("nn")
 					@tcp_sport = @sport
 					@tcp_dport = @dport
-					@tcp_hlen = (data[offset+12]>>4)<<2
+					@tcp_hlen = (data[offset+12,1].unpack("C")[0] >> 4) << 2
 					offset += @tcp_hlen
 				elsif @udp
 					@sport, @dport = data[offset,4].unpack("nn")
